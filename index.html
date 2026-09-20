@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>らいの部屋</title>
+<style>
+ body {
+    background-image: url("背景画像.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: #000000;
+    color: #00ff00;
+    font-family: monospace;
+    margin: 0;
+    padding: 0;
+}
+
+    .center { 
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  .blink { animation: blink 1s infinite; }
+  @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } 
+}
+  
+    .marquee-box {
+    background-color: #000000;
+    color: #ffff00;
+    font-weight: bold;
+    width: 60%;
+    margin: 10px auto;
+    padding: 5px;
+    border: 1px solid #333333;
+}
+
+  .info-box {
+    width: 50%;
+    max-width: 500px;
+    height: 100px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #000000;
+    border: 1px solid #00ff00;
+    text-align: left;
+    overflow-y: scroll;
+    font-size: 14px;
+}
+  
+  .info-box p {
+    margin: 5px 0;
+}
+
+  .footer {
+    background-color: #c0c0c0;
+    color: #000000;
+    width: 100%;
+    padding: 15px 0;
+    margin-top: 50px;
+    border-top: 2px solid #808080;
+}
+  .footer a {
+    color: #0000ff;
+}
+  .content-section {
+    display: none;
+    width: 70%;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.85);
+    border: 1px dashed #00ff00;
+    text-align: center;
+}
+  .content-section h2 {
+    color: #ffff00;
+    border-bottom: 1px dashed #00ff00;
+    padding-bottom: 5px;
+    margin-top: 0;
+    display: inline-block;
+}
+  .active {
+    display: block;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="center">
+  <h1>★☆らいの部屋へようこそ！！！！☆★</h1>
+  <p class="blink">【更新情報】 2026/09/20 仮で一旦サイト公開してみた</p>
+  <hr width="50%" size="4" color="#ff0000" noshade>
+  
+  <p>ここは管理人のまったり趣味サイトです。<br>
+  ゆっくりしていってね！！</p>
+  
+  <img src="https://www.civillink.net/sozai/hp.gif" alt="工事中">
+  
+  <marquee scrollamount="3" class="marquee-box">
+   ただいま絶賛改装中www見るものあんまりないけどプロフだけでも見て行って！
+  </marquee>
+  
+  <div class="info-box">
+    <p>・2026/09/20 掲示板設置めんどくてどうするか考え中…(phpわかんないw)</p>
+    <p>・2026/09/20 背景画像に激迷い中…</p>
+    <p>・2026/09/19 サイトをマルチページ化に大改造！(めちゃくちゃAI多様してるwww)</p>
+    <p>・2026/09/18 らいの部屋、ひっそりと作成を初めました。</p>
+    <p>・2026/09/17 ただいま工事中。素材を集めています…</p>
+  </div>
+
+   
+  <h3>◇ MENU ◇</h3>
+  <p>
+    <a href="profile.html" style="color: #ff00ff;">[プロフィール]</a> 
+    <a href="link.html" style="color: #ff00ff;">[リンク]</a> 
+    <a href="#" style="color: #ff00ff;">[<s>BBS</s>(工事中)]</a>
+  </p>
+
+  <br><br><br>
+  <p>あなたは <span id="count-display" class="counter-num" style="color: #ff0000;">000000</span> 人目の訪問者です<br>
+ 当サイトはキリ番踏み逃げ禁止です！踏んだ人はBBSにカキコしてってね～♪</p>
+
+</div>
+
+<script>
+   const namespace = "raino-heya.github.io";
+   const key = "raino_heya_github_io_visitor_counter";
+  
+   fetch(`https://countapi.mileshilliard.com/api/v1/hit/raino_heya_github_io_visitor_counter`)
+    .then(response => response.json())
+    .then(data => {
+      const currentCount = parseInt(data.value);
+
+      const paddedCount = ( '000000' + currentCount ).slice( -6 );
+      document.getElementById('count-display').innerText = paddedCount;
+
+      const kiribanList = [
+        0, 7, 10, 20, 22, 30, 33, 40, 44, 50, 55, 60, 66, 
+        70, 77, 80, 88, 90, 99, 100
+      ];
+      
+      if (kiribanList.includes(currentCount)) {
+        setTimeout(() => {
+          alert('🎉おめでとうございます！『' + currentCount + '』のキリ番をゲットしました！掲示板（BBS）に報告おねがいします（笑');
+        }, 100);
+      }
+    })
+    .catch(error => {
+      console.error('Counter error:', error);
+    });
+</script>
+
+</body>
+</html>

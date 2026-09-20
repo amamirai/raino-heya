@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>らいの掲示板</title>
+<style>
+  body {
+    background-image: url("背景画像.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #000000;
+    background-attachment: fixed; 
+    color: #00ff00;
+    font-family: monospace;
+    image-rendering: pixelated;
+    margin: 0;
+    padding: 0;
+}
+  
+  .center { 
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+  .content-section {
+    width: 70%;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.85);
+    border: 1px dashed #00ff00;
+    text-align: center;
+}
+  
+  .content-section h2 {
+    color: #ffff00;
+    border-bottom: 1px dashed #00ff00;
+    padding-bottom: 5px;
+    margin-top: 0;
+    display: inline-block;
+}
+
+  .footer-link {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+  .fc2-bbs-frame {
+   width: 100%;
+   max-width: 900px;
+   height: 650px;
+   border: 2px solid #00ff00;
+   background-color: #000000;
+}
+
+ </style>
+</head>
+<body>
+
+<div class="center">
+  <div class="content-section">
+    <h2>◆ BBS ◆</h2>
+    <p>こんなところまで作っておいて掲示板を設置するか迷い中……。</p>
+
+    <br>
+
+<div class="bbs-form">
+     <p>お名前：<br><input type="text" id="bbs-name" size="20" value="名無しさん"></p>
+     <p>題 名：<br><input type="text" id="bbs-title" value="無題"></p>
+     <p>コメント：<br><textarea id="bbs-comment" rows="5"></textarea></p>
+     <p>
+     <input type="submit" value="カキコ" onclick="alert('書き込みありがとうございます！\n\n……と言いたいところですが、現在管理人が完全放置中のため、カキコデータは宇宙の彼方へ消え去りました（爆）\n\nキリ番報告やメッセージは、Twitterとかで直撃してくれると嬉しいですっ☆');"> 
+     <input type="reset" value="リセット">
+    </p>
+</div>
+
+
+  </div>
+
+  <div class="footer-link">
+    <a href="index.html" style="color: #00ffff;">[トップに戻る]</a>
+  </div>
+</div>
+
+</body>
+</html>
