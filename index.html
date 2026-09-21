@@ -105,6 +105,9 @@
   </marquee>
   
   <div class="info-box">
+    <p>・2026/09/21 とりま、修正したカウンターの状態を更新しといた♪(^∇^*)</p>
+    <p>・2026/09/20 アクセスカウンターバグってたから修正(js初めてだからそれなりに時間かかった)</p>
+    <p>・2026/09/20 脆弱性だらけだし不完全だけど一旦githubで公開してみた(様子見)</p>
     <p>・2026/09/20 掲示板設置めんどくてどうするか考え中…(phpわかんないw)</p>
     <p>・2026/09/20 背景画像に激迷い中…</p>
     <p>・2026/09/19 サイトをマルチページ化に大改造！(めちゃくちゃAI多様してるwww)</p>
@@ -127,31 +130,45 @@
 </div>
 
 <script>
-   const namespace = "raino-heya.github.io";
-   const key = "raino_heya_github_io_visitor_counter";
-  
-   fetch(`https://countapi.mileshilliard.com/api/v1/hit/raino_heya_github_io_visitor_counter`)
-    .then(response => response.json())
-    .then(data => {
+  const key = "raino_heya_github_io_visitor_counter";
+  const cooldown = 60 * 60 * 1000;
+  const lastVisit = localStorage.getItem(key);
+  const now = Date.now();
+
+  if (!lastVisit || now - Number(lastVisit) >= cooldown) {
+    fetch(`https://countapi.mileshilliard.com/api/v1/hit/raino_heya_github_io_visitor_counter`)
+      .then(response => response.json())
+      .then(data => {
       const currentCount = parseInt(data.value);
-
-      const paddedCount = ( '000000' + currentCount ).slice( -6 );
+      const paddedCount = ('000000' + currentCount).slice(-6);
       document.getElementById('count-display').innerText = paddedCount;
+      localStorage.setItem(key, now.toString());
 
-      const kiribanList = [
-        0, 7, 10, 20, 22, 30, 33, 40, 44, 50, 55, 60, 66, 
-        70, 77, 80, 88, 90, 99, 100
-      ];
-      
-      if (kiribanList.includes(currentCount)) {
-        setTimeout(() => {
-          alert('🎉おめでとうございます！『' + currentCount + '』のキリ番をゲットしました！掲示板（BBS）に報告おねがいします（笑');
-        }, 100);
-      }
-    })
-    .catch(error => {
-      console.error('Counter error:', error);
-    });
+   const kiribanList = [0, 7, 10, 20, 22, 30, 33, 40, 44, 50, 
+                       55, 60, 66, 70, 77, 80, 88, 90, 99, 100];
+
+        if (kiribanList.includes(currentCount)) {
+          setTimeout(() => {
+            alert('🎉おめでとうございます！『'+ currentCount +'』のキリ番をゲットしました！掲示板（BBS）に報告おねがいします（笑');
+            }, 100);
+        }
+      })
+      .catch(error => {
+        console.error('Counter error:', error);
+      });
+  } else {
+    // カウントしなかった場合は現在のカウンター値だけ取得
+    fetch(`https://countapi.mileshilliard.com/api/v1/get/raino_heya_github_io_visitor_counter`)
+      .then(response => response.json())
+      .then(data => {
+        const currentCount = parseInt(data.value);
+        const paddedCount = ('000000' + currentCount).slice(-6);
+        document.getElementById('count-display').innerText = paddedCount;
+      })
+      .catch(error => {
+        console.error('Counter error:', error);
+      });
+}
 </script>
 
 </body>
